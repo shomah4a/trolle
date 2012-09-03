@@ -1,0 +1,57 @@
+.user {
+    background-image:url( ../icons/fam/user.gif ) !important;
+}
+
+.add {
+    background-image:url( ../icons/fam/add.png ) !important;
+}
+
+.edit {
+    background-image:url( ../icons/fam/cog_edit.png ) !important;
+}
+
+.close {
+    background-image:url( ../icons/fam/cross.gif ) !important;
+}
+
+.outline-function {
+    background-image:url( ../icons/fam/cog.gif ) !important;
+}
+
+.highlight {
+    height: 100%;
+    border: 1px solid #aaa;
+    overflow-y: scroll;
+}
+
+.highlight > .line-numbers {
+    width: 36px;
+    background-color: #ececec;
+    Float: left;
+    border-right: 1px solid #aaa;
+    padding-top: 5px;
+    text-align: right;
+    overflow-y: visible;
+}
+
+.highlight > .line-numbers a {
+    display: block;
+    border-bottom: 1px solid #ccc;
+    padding-right: 5px;
+    color: #aaa;
+    text-decoration: none;
+}
+.highlight > .line-numbers a:link {
+    color: #aaa;
+}
+
+.highlight > .body {
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 5px 3px;
+}
+
+.highlight > .body p {
+    padding-left: 5px;
+    margin-bottom: 1px;
+}

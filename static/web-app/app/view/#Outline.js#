@@ -1,0 +1,12 @@
+Ext.define('Trolle.view.Outline', {
+    extend: 'Ext.tree.Panel',
+
+    xtype: 'outline',
+
+    store: 'Outlines',
+
+    rootVisible: false,
+
+    lines: false,
+
+});
