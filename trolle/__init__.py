@@ -11,11 +11,7 @@ __author__ = '@shomah4a'
 
 import argparse
 
-from tornado import ioloop, web, websocket
-
 from . import config
-from .controller import application
-
 
 def parse_args(args):
     u'''
@@ -32,6 +28,8 @@ def parse_args(args):
 
 
 def serve(conf):
+
+    from .controller import application
 
     app = application.create_application()
     app.listen(conf.port)

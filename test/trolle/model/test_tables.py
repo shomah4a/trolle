@@ -1,13 +1,12 @@
 #-*- coding:utf-8 -*-
 
-from trolle.model import tables, session
-import pymysql
-
 import unittest
 import datetime
 
-
+import pymysql
 from sqlalchemy import exceptions
+
+from trolle.model import tables, session
 
 
 def mk_dbname():
