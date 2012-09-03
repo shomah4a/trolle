@@ -177,16 +177,14 @@ def _search_maker(cls):
 
         query = sql.select(cols,
                            sql.and_(*[d[k] == v for k, v in kw.items()]),
-                           tbl)
+                           tbl).order_by(tbl.c.id)
 
         result_proxy = sess.execute(query)
 
         results = list(result_proxy)
 
-        result = [dict(zip(keys, result))
-                  for result in results]
-
-        return result
+        return [cls(**dict(zip(keys, result)))
+                for result in results]
 
     return search_entry
 

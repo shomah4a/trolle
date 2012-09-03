@@ -1,0 +1,10 @@
+<!--*- mode:html -*-->
+<html>
+  <head>
+    <title>aaaa</title>
+  </head>
+  <body>
+    テスト
+    <div tal:content="python: context.handler.request" />
+  </body>
+</html>

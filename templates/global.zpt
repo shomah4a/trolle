@@ -1,0 +1,7 @@
+<!--*- coding:utf-8 mode:html -*-->
+
+<metal:block define-macro="global-defines">
+
+  <tal:global define="global t modules/trolle;" />
+
+</metal:block>

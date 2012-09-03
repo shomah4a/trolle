@@ -11,7 +11,10 @@ __author__ = '@shomah4a'
 
 import argparse
 
-import config
+from tornado import ioloop, web, websocket
+
+from . import config
+from .controller import application
 
 
 def parse_args(args):
@@ -27,6 +30,15 @@ def parse_args(args):
     return parser.parse_args(args)
 
 
+
+def serve(conf):
+
+    app = application.create_application()
+    app.listen(conf.port)
+    ioloop.IOLoop.instance().start()
+
+
+
 def main(args):
     u'''
     エントリポイントというもの
@@ -39,6 +51,8 @@ def main(args):
     config.init_config(parsed.root, parsed.conf)
 
     session.initialize(config.db)
+
+    serve(config.server)
 
 
 if __name__ == '__main__':

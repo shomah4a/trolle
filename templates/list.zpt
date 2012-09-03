@@ -1,0 +1,52 @@
+<!--*- mode:xml -*-->
+<html metal:use-macro="here/main/macros/main">
+  <title> 
+    <tal:block metal:fill-slot="title">
+      <tal:block content="context/table/__tablename__" />
+    </tal:block>
+  </title>
+
+  <body metal:fill-slot="body">
+
+    <tal:block define="table context/table/__table__;
+                       cols table/c/keys">
+    
+      <h1>
+        list of <tal:block replace="context/table/__tablename__" />
+      </h1>
+
+      <table border="1">
+        <tr>
+          <th tal:repeat="col cols" tal:content="col" />
+        </tr>
+        <tal:block repeat="item context/results">
+
+          <tr>
+            <td tal:repeat="col cols" tal:content="python: getattr(item, col)" />
+          </tr>
+          
+        </tal:block>
+      </table>
+
+      <h2>create form</h2>
+      <form method="post"
+            tal:attributes="action context/request/uri">
+        <table>
+          <tal:block repeat="col cols">
+            <tr tal:condition="python: col != 'id'">
+              <th tal:content="col" />
+              <td>
+                <input type="text"
+                       tal:attributes="name col" />
+              </td>
+            </tr>
+          </tal:block>
+        </table>
+
+        <input type="submit" value="create" />
+      </form>
+      
+    </tal:block>
+    
+  </body>
+</html>

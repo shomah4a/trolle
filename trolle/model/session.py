@@ -23,8 +23,6 @@ class Session():
 
         if exception[0] is not None:
             self.session.rollback()
-        else:
-            self.session.commit()
 
         self.session.close()
 
@@ -38,7 +36,7 @@ def initialize(config):
 
     engine = al.create_engine(config.uri, echo=config.echo)
 
-    session = orm.sessionmaker(autocommit=True)
+    session = orm.sessionmaker(autocommit=True, autoflush=False)
     session.configure(bind=engine)
     
 
