@@ -1,0 +1,6 @@
+{
+    data: [
+        { "user": "guest", "type": "join" },
+        { "user": "guest", "type": "comment" }
+    ]
+}
