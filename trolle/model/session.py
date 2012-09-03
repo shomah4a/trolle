@@ -30,38 +30,15 @@ class Session():
 
 
 
-class DBConfig(object):
-    u'''
-    DB の設定
-    '''
-
-    def __init__(self, uri, auto_commit=False):
-
-        self.uri = uri
-        self.auto_commit = auto_commit
-
-
-    def get_uri(self):
-
-        return self.uri
-
-
-    def get_auto_commit(self):
-
-        return self.auto_commit
-
-
 def initialize(config):
 
     global engine
     global session
     global meta
 
-    uri = config.get_uri()
+    engine = al.create_engine(config.uri, echo=config.echo)
 
-    engine = al.create_engine(uri, echo=True)
-
-    session = orm.sessionmaker(autocommit=config.get_auto_commit())
+    session = orm.sessionmaker(autocommit=True)
     session.configure(bind=engine)
     
 
