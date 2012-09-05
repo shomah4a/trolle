@@ -1,5 +1,6 @@
 Ext.define('Trolle.store.Document', {
     extend: 'Ext.data.Store',
+
     requires: [
         'Trolle.model.Document'
     ],

@@ -3,6 +3,7 @@ Ext.define('Trolle.controller.Document', {
 
     views: [
         'DocumentPanel',
+        'Outline',
         'SourceTree'
     ],
 
@@ -19,6 +20,11 @@ Ext.define('Trolle.controller.Document', {
             ref: 'tabPanel',
             selector: '#document-tab-panel'
         },
+        {
+            ref: 'outline',
+            selector: 'outline'
+        },
+
         // {
         //     ref: 'panels',
         //     selector: '#document-tab-panel documentpanel'
@@ -31,26 +37,37 @@ Ext.define('Trolle.controller.Document', {
     init: function() {
         this.control({
             'sourcetree': {
-                itemclick: this.doSelect
+                itemclick: this.doSelectDocument
+            },
+            'outline': {
+                itemclick: this.doSelectOutline
             }
         });
     },
 
     ////////////////////////////////////////////////////////////////
     // event handlers
-    doSelect: function(me, record, elem, index, event, opts) {
-        var name = record.get('name'),
-            path = record.get('path');
+    doSelectDocument: function(me, record, elem, index, event, opts) {
+        if (record.get('leaf')) {
+            var name = record.get('name'),
+                path = record.get('path');
 
-        this.openPanel(name, path, 1);
-
+            this.openPanel(name, path);
+        }
     },
+
+    doSelectOutline: function(me, record, elem, index, event, opts) {
+        this.gotoLine(record.get('lineNo'));
+    },
+
 
     ////////////////////////////////////////////////////////////////
     // business logics
-    openPanel: function(name, path, lineNo) {
+    openPanel: function(name, path) {
         var tabPanel = this.getTabPanel(),
+            outline = this.getOutline(),
             panel = this.getPanel(path);
+
         if (Ext.isEmpty(panel)) {
             panel = this.loadPanel(name, path);
             tabPanel.add(panel);
@@ -59,26 +76,44 @@ Ext.define('Trolle.controller.Document', {
         tabPanel.setActiveTab(panel);
     },
 
+    gotoLine: function(lineNo) {
+    },
+
+    getCurrentPanel: function() {
+        return this.getTabPanel().getActiveTab();
+    },
+
     getPanel: function(path) {
         return this.getTabPanel().getComponent(path);
     },
 
     loadPanel: function(name, path) {
-        var store = Ext.create('Trolle.store.Document', {});
+        var outline = this.getOutline(),
+            outlineData = null,
 
-        var panel = Ext.create('Trolle.view.DocumentPanel', {
-            title: name,
-            store: store,
-            itemId: path
-        });
+            documentStore = Ext.create('Trolle.store.Document', {
+                listeners: {
+                    load: function() {
+                        outlineData = documentStore.getProxy().reader.jsonData['outline'];
+                        outline.getStore().setRootNode(Ext.clone(outlineData));
+                    }
+                }
+            }),
 
-        return panel;
+            documentPanel = Ext.create('Trolle.view.DocumentPanel', {
+                title: name,
+                toolTip: path,
+                store: documentStore,
+                itemId: path,
+                listeners: {
+                    activate: function(me, opts) {
+                        outline.getStore().setRootNode(Ext.clone(outlineData));
+                    }
+                }
 
-        // store.load({
-        //     callback: function(Document) {
-        //     },
-        //     scope: this
-        // });
+            });
+
+        return documentPanel;
     },
 
 

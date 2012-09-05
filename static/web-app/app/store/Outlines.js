@@ -7,9 +7,7 @@ Ext.define('Trolle.store.Outlines', {
     model: 'Trolle.model.Outline',
 
     proxy: {
-        type: 'ajax',
-        url: 'data/outlines.json',
-        reader: 'json'
+        type: 'memory'
     },
 
     listeners: {
@@ -17,8 +15,7 @@ Ext.define('Trolle.store.Outlines', {
             newChildNode.set('text', newChildNode.get('name'));
             newChildNode.set('leaf', Ext.isEmpty(newChildNode.get('children')));
             newChildNode.set('iconCls', 'outline-function');
-
         }
-    },
-
+    }
 });
+
