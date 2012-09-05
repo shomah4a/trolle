@@ -8,7 +8,8 @@ pkgname = pkg.__name__
 setuptools.setup(
     name=pkgname,
     version=pkg.__version__,
-    packages=[pkgname],
+    packages=[pkgname,
+              'trolle.model'],
     install_requires=[
         'tornado',
         'sqlalchemy',
