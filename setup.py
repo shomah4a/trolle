@@ -15,6 +15,7 @@ setuptools.setup(
         'sqlalchemy',
         'PyMySQL',
         'zope.pagetemplate',
+        'pygments',
         ],
     author=pkg.__author__,
     license=pkg.__license__,
