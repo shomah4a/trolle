@@ -71,7 +71,7 @@ class Project(Base):
     repository_uri = decl.Column(al.UnicodeText(65535), nullable=False)
     repository_type = decl.Column(al.Unicode(255), nullable=False)
     encoding = decl.Column(al.Unicode(255), default=u'utf-8', nullable=False)
-    ready = decl.Column(Boolean, default=False, nullable=False)
+    ready = decl.Column(al.Boolean, default=False, nullable=False)
 
 
 
