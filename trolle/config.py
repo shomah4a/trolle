@@ -65,6 +65,11 @@ class Section(object):
 
 root = '.'
 
+# 色々
+general = Section(
+    converters=dict(repository=os.path.expandvars),
+    defaults=dict(repository='/tmp/path'))
+
 # サーバの設定
 server = Section(
     converters=dict(port=int),

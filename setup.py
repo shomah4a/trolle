@@ -9,7 +9,8 @@ setuptools.setup(
     name=pkgname,
     version=pkg.__version__,
     packages=[pkgname,
-              'trolle.model'],
+              'trolle.model',
+              'trolle.builder'],
     install_requires=[
         'tornado',
         'sqlalchemy',
