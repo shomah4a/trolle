@@ -4,33 +4,21 @@ Ext.define('Trolle.controller.User', {
     stores: ['Users'],
 
     refs: [{
-        ref: 'usersList'
+        ref: 'usersList',
+        selector: 'userlist'
     }],
 
-    init: function() {
-        // this.control({
-        //     'roles': {
-        //         itemcontextmenu: this.onItemContextMenuClick,
-        //         itemclick: this.onItemClick
-        //     }
-        // });
+    ////////////////////////////////////////////////////////////////
+    // event handlers
+
+    ////////////////////////////////////////////////////////////////
+    // business logics
+    joinUser: function(user) {
+        var userList = this.getUserList();
     },
 
-    onLaunch: function() {
-        // var sourcesStore = this.getUsersStore();
-        // sourcesStore.load({
-        //     callback: this.onUsersLoad,
-        //     scope: this
-        // });
+    leftUser: function(user) {
+
     },
 
-    onUsersLoad: function() {
-    }
 });
-
-
-
-
-
-
-

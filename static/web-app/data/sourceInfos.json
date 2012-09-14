@@ -4,23 +4,23 @@
         {
             name: 'app',
             children: [
-                { leaf:true, name: 'Application.js', path: 'Application.js' }
+                { leaf:true, name: 'Application.js', path: '/Application.js' }
             ]
         },
         {
             name: 'button',
             children: [
-                { leaf:true, name: 'Button.js', path: 'Button.js' },
-                { leaf:true, name: 'Cycle.js', path: 'Cycle.js' },
-                { leaf:true, name: 'Split.js', path: 'Split.js' }
+                { leaf:true, name: 'Button.js', path: '/Button.js' },
+                { leaf:true, name: 'Cycle.js', path: '/Cycle.js' },
+                { leaf:true, name: 'Split.js', path: '/Split.js' }
             ]
         },
         {
             name: 'container',
             children: [
-                { leaf:true, name: 'ButtonGroup.js', path: 'ButtonGroup.js' },
-                { leaf:true, name: 'Container.js', path: 'Container.js' },
-                { leaf:true, name: 'Viewport.js', path: 'Viewport.js' }
+                { leaf:true, name: 'ButtonGroup.js', path: '/ButtonGroup.js' },
+                { leaf:true, name: 'Container.js', path: '/Container.js' },
+                { leaf:true, name: 'Viewport.js', path: '/Viewport.js' }
             ]
         },
         {
@@ -29,8 +29,8 @@
                 {
                     name: 'dom',
                     children: [
-                        { leaf:true, name: 'Element.form.js', path: 'Element.form.js' },
-                        { leaf:true, name: 'Element.static-more.js', path: 'Element.static-more.js' }
+                        { leaf:true, name: 'Element.form.js', path: '/Element.form.js' },
+                        { leaf:true, name: 'Element.static-more.js', path: '/Element.static-more.js' }
                     ]
                 }
             ]
@@ -38,46 +38,46 @@
         {
             name: 'dd',
             children: [
-                { leaf:true, name: 'DD.js', path: 'DD.js' },
-                { leaf:true, name: 'DDProxy.js', path: 'DDProxy.js' },
-                { leaf:true, name: 'DDTarget.js', path: 'DDTarget.js' },
-                { leaf:true, name: 'DragDrop.js', path: 'DragDrop.js' },
-                { leaf:true, name: 'DragDropManager.js', path: 'DragDropManager.js' },
-                { leaf:true, name: 'DragSource.js', path: 'DragSource.js' },
-                { leaf:true, name: 'DragTracker.js', path: 'DragTracker.js' },
-                { leaf:true, name: 'DragZone.js', path: 'DragZone.js' },
-                { leaf:true, name: 'DragTarget.js', path: 'DragTarget.js' },
-                { leaf:true, name: 'DragZone.js', path: 'DragZone.js' },
-                { leaf:true, name: 'Registry.js', path: 'Registry.js' },
-                { leaf:true, name: 'ScrollManager.js', path: 'ScrollManager.js' },
-                { leaf:true, name: 'StatusProxy.js', path: 'StatusProxy.js' }
+                { leaf:true, name: 'DD.js', path: '/DD.js' },
+                { leaf:true, name: 'DDProxy.js', path: '/DDProxy.js' },
+                { leaf:true, name: 'DDTarget.js', path: '/DDTarget.js' },
+                { leaf:true, name: 'DragDrop.js', path: '/DragDrop.js' },
+                { leaf:true, name: 'DragDropManager.js', path: '/DragDropManager.js' },
+                { leaf:true, name: 'DragSource.js', path: '/DragSource.js' },
+                { leaf:true, name: 'DragTracker.js', path: '/DragTracker.js' },
+                { leaf:true, name: 'DragZone.js', path: '/DragZone.js' },
+                { leaf:true, name: 'DragTarget.js', path: '/DragTarget.js' },
+                { leaf:true, name: 'DragZone.js', path: '/DragZone.js' },
+                { leaf:true, name: 'Registry.js', path: '/Registry.js' },
+                { leaf:true, name: 'ScrollManager.js', path: '/ScrollManager.js' },
+                { leaf:true, name: 'StatusProxy.js', path: '/StatusProxy.js' }
             ]
         },
         {
             name: 'core',
             children: [
-                { leaf:true, name: 'Element.alignment.js', path: 'Element.alignment.js' },
-                { leaf:true, name: 'Element.anim.js', path: 'Element.anim.js' },
-                { leaf:true, name: 'Element.dd.js', path: 'Element.dd.js' },
-                { leaf:true, name: 'Element.fx.js', path: 'Element.fx.js' },
-                { leaf:true, name: 'Element.js', path: 'Element.js' },
-                { leaf:true, name: 'Element.position.js', path: 'Element.position.js' },
-                { leaf:true, name: 'Element.scroll.js', path: 'Element.scroll.js' },
-                { leaf:true, name: 'Element.style.js', path: 'Element.style.js' },
-                { leaf:true, name: 'Element.traversal.js', path: 'Element.traversal.js' },
-                { leaf:true, name: 'Helper.js', path: 'Helper.js' },
-                { leaf:true, name: 'Query.js', path: 'Query.js' }
+                { leaf:true, name: 'Element.alignment.js', path: '/Element.alignment.js' },
+                { leaf:true, name: 'Element.anim.js', path: '/Element.anim.js' },
+                { leaf:true, name: 'Element.dd.js', path: '/Element.dd.js' },
+                { leaf:true, name: 'Element.fx.js', path: '/Element.fx.js' },
+                { leaf:true, name: 'Element.js', path: '/Element.js' },
+                { leaf:true, name: 'Element.position.js', path: '/Element.position.js' },
+                { leaf:true, name: 'Element.scroll.js', path: '/Element.scroll.js' },
+                { leaf:true, name: 'Element.style.js', path: '/Element.style.js' },
+                { leaf:true, name: 'Element.traversal.js', path: '/Element.traversal.js' },
+                { leaf:true, name: 'Helper.js', path: '/Helper.js' },
+                { leaf:true, name: 'Query.js', path: '/Query.js' }
             ]
         },
-        { leaf:true, name: 'Action.js', path: 'Action.js' },
-        { leaf:true, name: 'Component.js', path: 'Component.js' },
-        { leaf:true, name: 'Editor.js', path: 'Editor.js' },
-        { leaf:true, name: 'Img.js', path: 'Img.js' },
-        { leaf:true, name: 'Layer.js', path: 'Layer.js' },
-        { leaf:true, name: 'LoadMask.js', path: 'LoadMask.js' },
-        { leaf:true, name: 'ProgressBar.js', path: 'ProgressBar.js' },
-        { leaf:true, name: 'Shadow.js', path: 'Shadow.js' },
-        { leaf:true, name: 'ShadowPool.js', path: 'ShadowPool.js' },
-        { leaf:true, name: 'ZIndexManager.js', path: 'ZIndexManager.js' }
+        { leaf:true, name: 'Action.js', path: '/Action.js' },
+        { leaf:true, name: 'Component.js', path: '/Component.js' },
+        { leaf:true, name: 'Editor.js', path: '/Editor.js' },
+        { leaf:true, name: 'Img.js', path: '/Img.js' },
+        { leaf:true, name: 'Layer.js', path: '/Layer.js' },
+        { leaf:true, name: 'LoadMask.js', path: '/LoadMask.js' },
+        { leaf:true, name: 'ProgressBar.js', path: '/ProgressBar.js' },
+        { leaf:true, name: 'Shadow.js', path: '/Shadow.js' },
+        { leaf:true, name: 'ShadowPool.js', path: '/ShadowPool.js' },
+        { leaf:true, name: 'ZIndexManager.js', path: '/ZIndexManager.js' }
     ]
 }

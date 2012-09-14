@@ -7,6 +7,9 @@ Ext.define('Trolle.view.Outline', {
 
     rootVisible: false,
 
-    lines: false
+    lines: false,
 
+    setRootNode: function(node) {
+        this.getStore().setRootNode(Ext.clone(node));
+    }
 });
