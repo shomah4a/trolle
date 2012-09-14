@@ -56,6 +56,8 @@ class Project(Base):
     :param str project_name: プロジェクト名
     :param str repository_uri: リポジトリのパス
     :param str repository_type: リポジトリの形式 (git とか mercurial とか)
+    :param str encoding: リポジトリのエンコード設定 (default: utf-8)
+    :param bool ready: プロジェクトのセットアップが終わったかどうか
     '''
 
     __tablename__ = 'projects'
@@ -68,6 +70,8 @@ class Project(Base):
     name = decl.Column(al.Unicode(255), nullable=False)
     repository_uri = decl.Column(al.UnicodeText(65535), nullable=False)
     repository_type = decl.Column(al.Unicode(255), nullable=False)
+    encoding = decl.Column(al.Unicode(255), default=u'utf-8', nullable=False)
+    ready = decl.Column(al.Boolean, default=False, nullable=False)
 
 
 
