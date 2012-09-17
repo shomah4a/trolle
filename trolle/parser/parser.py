@@ -9,6 +9,11 @@ from . import token
 def tokenize(filelike, fname):
     u'''
     ファイルっぽいオブジェクトからトークン生成
+
+    :param filelike filelike: ファイルオブジェクトみたいなやつ
+    :param basestring fname: 文字列
+    :return: トークン列
+    :rtype: list< `Token <trolle.token.Token>`_ >
     '''
 
     lexer = lexers.get_lexer_for_filename(fname)

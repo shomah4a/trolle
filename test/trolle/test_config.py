@@ -1,14 +1,33 @@
 #-*- coding:utf-8 -*-
 
+import os
+import sys
 import unittest
+import tempfile
+import copy
 
 from trolle import config
 
 
 class TestConfig(unittest.TestCase):
 
-    def test_section(self):
+    def setUp(self):
 
+        self.old_db = copy.deepcopy(config.db)
+        self.old_server = copy.deepcopy(config.server)
+        
+
+    def tearDown(self):
+
+        config.db = self.old_db
+        config.server = self.old_server
+
+        
+    @unittest.skip
+    def test_section(self):
+        u'''
+        設定用のセクションテスト
+        '''
 
         s = config.Section(params=['x', 'y', 'z'],
                            defaults=dict(a=10,
@@ -37,5 +56,29 @@ class TestConfig(unittest.TestCase):
 
         with self.assertRaises(config.ConfigureError):
             s.xx = 10
+
+
+    def test_init_config(self):
+        u'''
+        設定読み込みテスト
+        '''
+
+        with tempfile.NamedTemporaryFile() as fp:
+
+            fp.write('''[db]
+echo = 0
+
+[server]
+port = 8000
+
+[ddd]
+aaa = 10
+''')
+            fp.flush()
+            config.init_config(os.path.dirname(fp.name),
+                               [fp.name, 'aaaa'])
+
+            self.assertEqual(config.db.echo, 0)
+            self.assertEqual(config.server.port, 8000)
 
         

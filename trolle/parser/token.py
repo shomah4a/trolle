@@ -1,12 +1,12 @@
 #-*- coding:utf-8 -*-
 
+from trolle import utils
 
 
 class File(object):
     u'''
     ファイル情報
     '''
-
 
     def __init__(self, fpath, tokens):
 
@@ -23,13 +23,13 @@ class File(object):
 
 
 
-class Token(object):
+class Token(utils.SlotEqual):
     u'''
     トークン情報を持つ
     Pygments のトークンだけだと微妙に足りないので追加で情報を持たせる
     '''
 
-    __slots__ = ['type', 'text', 'column', 'index']
+    __slots__ = ['type', 'text', 'line', 'column']
     
     
     def __init__(self, type, text, line, column):
@@ -38,6 +38,13 @@ class Token(object):
         self.text = text
         self.line = line
         self.column = column
+
+
+
+    def __eq__(self, other):
+        u'''
+        同値チェック
+        '''
 
 
     @classmethod
@@ -62,4 +69,5 @@ class Token(object):
                 column = 0
 
         return result
+    
 

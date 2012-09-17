@@ -3,6 +3,7 @@ u'''
 設定とか置いておく場所
 '''
 
+import sys
 import os
 import ConfigParser as configparser
 import logging
@@ -85,6 +86,37 @@ db = Section(
 
 
 
+def load_file(root_dir, fpath):
+    u'''
+    設定ファイルをひとつ読み込む
+    '''
+
+    g = globals()
+
+    if not os.path.exists(fpath):
+        logger.error('File not found: ' + fpath)
+        return
+    
+    parser = configparser.SafeConfigParser()
+    parser.read(fpath)
+
+    for section in  parser.sections():
+
+        s = g.get(section)
+
+        if s is None or not isinstance(g[section], Section):
+            logger.error('Invalid section: ' + section)
+            continue
+    
+        options = parser.options(section)
+
+        for option in options:
+            value = parser.get(section, option)
+            setattr(s, option, value)
+            logger.info('Optiopn: [%s] %s = %s' % (section, option, getattr(s, option)))
+
+
+
 def init_config(root_dir, fpathes):
     u'''
     設定ファイルを読み込む
@@ -93,30 +125,7 @@ def init_config(root_dir, fpathes):
     global root
 
     root = root_dir
-    g = globals()
 
     for fpath in fpathes:
 
-        if not os.path.exists(fpath):
-            return
-    
-        parser = configparser.SafeConfigParser()
-        parser.read(fpath)
-
-        
-
-        for section in  parser.sections():
-
-            s = g.get(section)
-
-            if s is None or not isinstance(g[section], Section):
-                logger.error('Invalid section: ' + section)
-                continue
-        
-            options = parser.options(section)
-
-            for option in options:
-                value = parser.get(section, option)
-                setattr(s, option, value)
-                logger.info('Optiopn: [%s] %s = %s' % (section, option, getattr(s, option)))
-            
+        load_file(root_dir, fpath)

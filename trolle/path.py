@@ -27,8 +27,3 @@ def get_respository_by_project(proj):
     return os.path.join(root, str(proj.owner_id), str(proj.id))
 
 
-
-
-    
-
-    
