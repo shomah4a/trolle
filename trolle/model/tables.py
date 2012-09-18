@@ -93,7 +93,7 @@ class File(Base):
 
     id = decl.Column(al.Integer, autoincrement=True, primary_key=True)
     project_id = decl.Column(al.Integer, al.ForeignKey('projects.id'), nullable=False)
-    filepath = decl.Column(al.Unicode(512), nullable=False)
+    filepath = decl.Column(al.Unicode(255), nullable=False)
 
 
 
@@ -118,7 +118,7 @@ class Tag(Base):
 
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
     file_id = decl.Column(al.Integer, al.ForeignKey('files.id'), nullable=False)
-    identifier = decl.Column(al.Unicode(512), nullable=False)
+    identifier = decl.Column(al.Unicode(255), nullable=False)
     line = decl.Column(al.Integer, nullable=False)
     column = decl.Column(al.Integer, nullable=False)
     type = decl.Column(al.Unicode(255), nullable=False)
