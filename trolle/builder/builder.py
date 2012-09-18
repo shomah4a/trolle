@@ -26,7 +26,7 @@ def checkout(proj, root):
 
 
 
-def project_builder(proj):
+def build_project(proj):
     u'''
     プロジェクトをチェックアウトしたりしてとってくる
     '''

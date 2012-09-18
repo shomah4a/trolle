@@ -63,6 +63,7 @@ class TestConfig(unittest.TestCase):
         設定読み込みテスト
         '''
 
+        # 正常系
         with tempfile.NamedTemporaryFile() as fp:
 
             fp.write('''[db]
@@ -70,15 +71,44 @@ echo = 0
 
 [server]
 port = 8000
-
-[ddd]
-aaa = 10
 ''')
             fp.flush()
             config.init_config(os.path.dirname(fp.name),
-                               [fp.name, 'aaaa'])
+                               [fp.name])
 
             self.assertEqual(config.db.echo, 0)
             self.assertEqual(config.server.port, 8000)
+
+
+        # 不明なセクション
+        with self.assertRaises(config.ConfigureError):
+            with tempfile.NamedTemporaryFile() as fp:
+
+                fp.write('''
+[ddd]
+aaa = 10
+''')
+                fp.flush()
+                config.init_config(os.path.dirname(fp.name),
+                                   [fp.name])
+
+        # 不明な設定キー
+        with self.assertRaises(config.ConfigureError):
+            with tempfile.NamedTemporaryFile() as fp:
+
+                fp.write('''
+[db]
+aaa = 10
+''')
+                fp.flush()
+                config.init_config(os.path.dirname(fp.name),
+                                   [fp.name])
+
+        # 不明なファイル
+        with self.assertRaises(OSError):
+
+            config.init_config(os.path.dirname(fp.name),
+                               ['bbbbbb'])
+            
 
         

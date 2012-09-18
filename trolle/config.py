@@ -18,12 +18,6 @@ class ConfigureError(NameError):
     設定トチったときに出るエラー
     '''
 
-    def __init__(self, name):
-
-        msg = 'Invalid config param: %s' % name
-
-        super(ConfigureError, self).__init__(msg)
-
 
 class Section(object):
     u'''
@@ -54,7 +48,8 @@ class Section(object):
             return
 
         if key not in self.__dict__['__keys']:
-            raise ConfigureError(key)
+            msg = 'Invalid config param: %s' % key
+            raise ConfigureError(msg)
 
         value = value.strip()
 
@@ -94,8 +89,7 @@ def load_file(root_dir, fpath):
     g = globals()
 
     if not os.path.exists(fpath):
-        logger.error('File not found: ' + fpath)
-        return
+        raise OSError('Config file not found: ' + fpath)
     
     parser = configparser.SafeConfigParser()
     parser.read(fpath)
@@ -105,8 +99,7 @@ def load_file(root_dir, fpath):
         s = g.get(section)
 
         if s is None or not isinstance(g[section], Section):
-            logger.error('Invalid section: ' + section)
-            continue
+            raise ConfigureError('Invalid section: ' + section)
     
         options = parser.options(section)
 
