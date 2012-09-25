@@ -11,4 +11,4 @@ def get_template_dir():
     テンプレートのある場所
     '''
 
-    return os.path.join(config.root, 'templates')
+    return os.path.join(os.path.dirname(__file__), 'templates')

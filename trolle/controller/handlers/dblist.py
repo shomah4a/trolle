@@ -4,7 +4,7 @@ from tornado import web
 
 from trolle.controller import utils
 from trolle.model import session
-from trolle.controller.template import zpt
+from trolle.template import zpt
 
 
 class DBListHandler(web.RequestHandler):

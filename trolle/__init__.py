@@ -39,7 +39,13 @@ def serve(conf):
     ioloop.IOLoop.instance().start()
 
 
+def monkey():
 
+    from zope import i18n
+
+    i18n.translate = None
+
+    
 def main(args):
     u'''
     エントリポイントというもの
@@ -52,6 +58,8 @@ def main(args):
     config.init_config(parsed.root, parsed.conf)
 
     session.initialize(config.db)
+
+    monkey()
 
     serve(config.server)
 

@@ -3,7 +3,7 @@
 from tornado import ioloop, web, websocket
 
 from . import utils
-from .template import zpt
+from trolle.template import zpt
 from .handlers import handlers, dblist
 
 from trolle.model import tables

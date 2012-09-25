@@ -8,6 +8,10 @@
 
   <body metal:fill-slot="body">
 
+    <tal:block i18n:domain="test" i18n:target="ja">
+      <p i18n:translate="">testmsg</p>
+     </tal:block>
+
     <tal:block define="table context/table/__table__;
                        cols table/c/keys">
     

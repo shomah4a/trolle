@@ -8,7 +8,7 @@ import sys
 
 from zope.pagetemplate import pagetemplate
 
-from trolle.controller import template
+from trolle import template
 
 
 class ZPTPath(object):

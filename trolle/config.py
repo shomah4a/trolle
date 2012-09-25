@@ -7,6 +7,7 @@ import sys
 import os
 import ConfigParser as configparser
 import logging
+import tempfile
 
 from . import log
 
