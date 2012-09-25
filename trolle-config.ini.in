@@ -1,3 +1,4 @@
+# trolle-config.ini にコピーしてね
 [general]
 # リポジトリを展開する場所
 repository = $HOME/trolle_repository
