@@ -123,3 +123,17 @@ def init_config(root_dir, fpathes):
     for fpath in fpathes:
 
         load_file(root_dir, fpath)
+
+    __init_zcml()
+
+
+def __init_zcml():
+
+    from zope.configuration import xmlconfig
+
+    zcml = os.path.join(os.path.dirname(__file__), 'configure.zcml')
+
+    xmlconfig.file(zcml)
+
+
+
