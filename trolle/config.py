@@ -3,13 +3,11 @@ u'''
 設定とか置いておく場所
 '''
 
-import sys
 import os
 import ConfigParser as configparser
-import logging
-import tempfile
 
 from . import log
+
 
 logger = log.mk_logger(__name__)
 
@@ -91,7 +89,7 @@ def load_file(root_dir, fpath):
 
     if not os.path.exists(fpath):
         raise OSError('Config file not found: ' + fpath)
-    
+
     parser = configparser.SafeConfigParser()
     parser.read(fpath)
 
@@ -101,7 +99,7 @@ def load_file(root_dir, fpath):
 
         if s is None or not isinstance(g[section], Section):
             raise ConfigureError('Invalid section: ' + section)
-    
+
         options = parser.options(section)
 
         for option in options:

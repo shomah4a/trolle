@@ -6,4 +6,5 @@ before_script:
         - wget http://svn.zope.org/*checkout*/zc.buildout/trunk/bootstrap/bootstrap.py
         - python bootstrap.py -d
         - bin/buildout
-script: bin/nose
+        - cp trolle-config.ini.in trolle-config.ini
+script: test.sh

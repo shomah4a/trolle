@@ -1,8 +1,7 @@
 #-*- coding:utf-8 -*-
 
-import os
 import sqlalchemy as al
-from sqlalchemy import orm, sql
+from sqlalchemy import sql
 from sqlalchemy.ext import declarative as decl
 
 
@@ -19,7 +18,7 @@ class User(Base):
 
     __tablename__ = 'users'
     __table_args__ = (
-        {'mysql_engine':'InnoDB'}
+        {'mysql_engine': 'InnoDB'}
         )
 
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
@@ -38,7 +37,7 @@ class LoginInfo(Base):
 
     __tablename__ = 'login_infos'
     __table_args__ = (
-        {'mysql_engine':'InnoDB'}
+        {'mysql_engine': 'InnoDB'}
         )
 
     user_id = decl.Column(al.Integer, al.ForeignKey('users.id'), primary_key=True)
@@ -62,7 +61,7 @@ class Project(Base):
 
     __tablename__ = 'projects'
     __table_args__ = (
-        {'mysql_engine':'InnoDB'}
+        {'mysql_engine': 'InnoDB'}
         )
 
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
@@ -88,7 +87,7 @@ class File(Base):
     __tablename__ = 'files'
     __table_args__ = (
         al.UniqueConstraint('project_id', 'filepath', name='uc_file'),
-        {'mysql_engine':'InnoDB'}
+        {'mysql_engine': 'InnoDB'}
         )
 
     id = decl.Column(al.Integer, autoincrement=True, primary_key=True)
@@ -107,13 +106,13 @@ class Tag(Base):
     :param int line: タグの行
     :param int column: 行内の開始位置
     :param int type: タグのタイプ(定義か参照か)
-    
+
     '''
 
     __tablename__ = 'tags'
     __table_args__ = (
         al.UniqueConstraint('file_id', 'identifier', 'line', 'column', 'type', name='uc_tag'),
-        {'mysql_engine':'InnoDB'}
+        {'mysql_engine': 'InnoDB'}
         )
 
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
@@ -128,21 +127,21 @@ class Tag(Base):
 class Comment(Base):
     u'''
     ソースコードのコメント
-    
+
     :param int id: コメント ID
     :param int user_id: ユーザ ID (FK)
     :param int file_id: ファイル ID (FK)
     :param int line: 行番号
     :param str text: コメント内容
-    
+
     '''
 
     __tablename__ = 'comments'
     __table_args__ = (
         al.UniqueConstraint('user_id', 'file_id', 'line'),
-        {'mysql_engine':'InnoDB'}
+        {'mysql_engine': 'InnoDB'}
         )
-    
+
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
     user_id = decl.Column(al.Integer, al.ForeignKey('users.id'), nullable=False)
     file_id = decl.Column(al.Integer, al.ForeignKey('files.id'), nullable=False)

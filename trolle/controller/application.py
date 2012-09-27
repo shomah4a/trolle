@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 
-from tornado import ioloop, web, websocket
+from tornado import web
 
 from . import utils
 from trolle.template import zpt
@@ -42,4 +42,4 @@ def create_application():
 
     return app
 
-    
+

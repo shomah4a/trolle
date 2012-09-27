@@ -1,8 +1,7 @@
 #-*- coding:utf-8 -*-
 
-import os
 import sqlalchemy as al
-from sqlalchemy import orm, sql
+from sqlalchemy import orm
 
 from . import tables
 
@@ -27,6 +26,10 @@ class Session():
         self.session.close()
 
 
+engine = None
+session = None
+meta = None
+
 
 def initialize(config):
 
@@ -38,7 +41,7 @@ def initialize(config):
 
     session = orm.sessionmaker(autocommit=True, autoflush=False)
     session.configure(bind=engine)
-    
+
 
     tables.Base.metadata.bind = engine
     tables.Base.metadata.create_all()

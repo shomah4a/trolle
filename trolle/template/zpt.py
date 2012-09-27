@@ -4,7 +4,6 @@ zpt を扱う
 '''
 
 import os
-import sys
 
 from zope.pagetemplate import pagetemplate
 
@@ -15,7 +14,7 @@ class ZPTPath(object):
     u'''
     zpt をレンダリングする際に使うパス情報をもったクラス
     '''
-    
+
 
     EXTENSION = '.zpt'
 
@@ -43,7 +42,7 @@ class ZPTPath(object):
         try:
             return self[attr]
         except KeyError:
-            raise AttributeError, attr
+            raise AttributeError(attr)
 
 
     def __getitem__(self, key):
@@ -71,7 +70,7 @@ class ZPTTemplate(ZPTPath, pagetemplate.PageTemplate):
     '''
 
     def __init__(self, path):
-        
+
         pagetemplate.PageTemplate.__init__(self)
         ZPTPath.__init__(self, path)
 
@@ -90,9 +89,9 @@ class ZPTTemplate(ZPTPath, pagetemplate.PageTemplate):
 
         rval = pagetemplate.PageTemplate.pt_getContext(self, args, **kw)
         options.update(rval)
-        
+
         options['here'] = self
-        
+
         return options
 
 
@@ -106,8 +105,8 @@ class Context(dict):
             return self[key]
 
         return super(Context, self).__getattr__(key)
-    
-        
+
+
 
 
 def rendering(filepath, context):
@@ -118,7 +117,7 @@ def rendering(filepath, context):
     :param dict context: コンテキスト情報
     :return: レンダリング結果
     :rtype: unicode
-    '''    
+    '''
 
     tmpldir = template.get_template_dir()
 
@@ -128,4 +127,4 @@ def rendering(filepath, context):
 
     return tmpl(context=Context(context))
 
-    
+

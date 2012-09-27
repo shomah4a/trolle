@@ -3,8 +3,6 @@ __import__('pkg_resources').declare_namespace(__name__)
 
 import os
 
-from trolle import config
-
 
 def get_template_dir():
     u'''

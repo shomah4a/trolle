@@ -30,8 +30,8 @@ class Token(utils.SlotEqual):
     '''
 
     __slots__ = ['type', 'text', 'line', 'column']
-    
-    
+
+
     def __init__(self, type, text, line, column):
 
         self.type = type
@@ -69,5 +69,5 @@ class Token(utils.SlotEqual):
                 column = 0
 
         return result
-    
+
 

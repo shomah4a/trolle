@@ -20,18 +20,19 @@ def parse_args(args):
     '''
 
     parser = argparse.ArgumentParser(description=u'とろーるさんだよー')
-    
+
     parser.add_argument('--root', dest='root', default='.')
     parser.add_argument('--conf', dest='conf', action='append', default=[])
 
     return parser.parse_args(args)
 
 
-
 def serve(conf):
+    u'''
+    サーバ立ち上げ
+    '''
 
-    from tornado import ioloop, web, websocket
-
+    from tornado import ioloop
     from .controller import application
 
     app = application.create_application()
@@ -39,27 +40,18 @@ def serve(conf):
     ioloop.IOLoop.instance().start()
 
 
-def monkey():
-
-    from zope import i18n
-
-    i18n.translate = None
-
-    
 def main(args):
     u'''
     エントリポイントというもの
     '''
 
     from .model import session
-    
+
     parsed = parse_args(args)
 
     config.init_config(parsed.root, parsed.conf)
 
     session.initialize(config.db)
-
-    monkey()
 
     serve(config.server)
 

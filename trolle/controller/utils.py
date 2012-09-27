@@ -23,7 +23,7 @@ def set_content_type(f, mime, charset=None):
         self.write(result.encode('utf-8'))
 
     return call
-    
+
 
 
 def utf8html(f):

@@ -19,7 +19,7 @@ class SlotEqual(object):
 
         if not isinstance(self, type(other)):
             return False
-        
+
         if self.__slots__ != other.__slots__:
             return False
 
@@ -31,11 +31,11 @@ class SlotEqual(object):
 
         return not self.__eq__(other)
 
-    
 
 
 
-        
-        
 
-        
+
+
+
+

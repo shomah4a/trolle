@@ -15,7 +15,7 @@ class DBListHandler(web.RequestHandler):
     def __init__(self, app, request, table, search_func, create_func):
 
         super(DBListHandler, self).__init__(app, request)
-        
+
         self.table = table
         self.search = search_func
         self.create = create_func
@@ -29,7 +29,7 @@ class DBListHandler(web.RequestHandler):
         '''
 
         with session.Session() as sess:
-        
+
             results = self.search(sess,
                                   **utils.get_first_params(self.request.arguments))
 
@@ -45,7 +45,7 @@ class DBListHandler(web.RequestHandler):
 
         keys = [x for x in self.table.__table__.c.keys()
                 if x != 'id']
-        
+
         params = dict((key, self.get_argument(key))
                       for key in keys)
 

@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 
-from tornado import ioloop, web, websocket
+from tornado import web
 
 
 class AddSlashHandler(web.RequestHandler):
@@ -10,4 +10,4 @@ class AddSlashHandler(web.RequestHandler):
 
     def get(self, *args):
 
-        self.redirect(self.request.uri+'/')
+        self.redirect(self.request.uri + '/')
