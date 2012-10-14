@@ -15,7 +15,7 @@ def is_parsable(filename):
     '''
 
     try:
-        lexer = lexers.get_lexer_for_filename(filename)
+        lexers.get_lexer_for_filename(filename)
         return True
     except util.ClassNotFound:
         return False

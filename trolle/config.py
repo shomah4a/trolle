@@ -93,7 +93,7 @@ def load_file(root_dir, fpath):
     parser = configparser.SafeConfigParser()
     parser.read(fpath)
 
-    for section in  parser.sections():
+    for section in parser.sections():
 
         s = g.get(section)
 

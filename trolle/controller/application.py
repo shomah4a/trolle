@@ -20,7 +20,8 @@ class TestHandler(web.RequestHandler):
 
 def create_application():
 
-    app = web.Application([
+    app = web.Application(
+        [
             ('/[^/]+', handlers.AddSlashHandler),
             ('/users/', dblist.DBListHandler, dict(table=tables.User,
                                                    search_func=tables.search_user,
@@ -38,7 +39,7 @@ def create_application():
                                                       search_func=tables.search_comment,
                                                       create_func=tables.create_comment)),
             ('/.*', TestHandler),
-            ])
+        ])
 
     return app
 

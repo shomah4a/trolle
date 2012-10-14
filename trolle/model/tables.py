@@ -18,8 +18,7 @@ class User(Base):
 
     __tablename__ = 'users'
     __table_args__ = (
-        {'mysql_engine': 'InnoDB'}
-        )
+        {'mysql_engine': 'InnoDB'})
 
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
     name = decl.Column(al.Unicode(255), nullable=False)
@@ -37,8 +36,7 @@ class LoginInfo(Base):
 
     __tablename__ = 'login_infos'
     __table_args__ = (
-        {'mysql_engine': 'InnoDB'}
-        )
+        {'mysql_engine': 'InnoDB'})
 
     user_id = decl.Column(al.Integer, al.ForeignKey('users.id'), primary_key=True)
     service_name = decl.Column(al.Unicode(255), primary_key=True)
@@ -61,8 +59,7 @@ class Project(Base):
 
     __tablename__ = 'projects'
     __table_args__ = (
-        {'mysql_engine': 'InnoDB'}
-        )
+        {'mysql_engine': 'InnoDB'})
 
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
     owner_id = decl.Column(al.Integer, al.ForeignKey('users.id'), nullable=False)
@@ -87,8 +84,7 @@ class File(Base):
     __tablename__ = 'files'
     __table_args__ = (
         al.UniqueConstraint('project_id', 'filepath', name='uc_file'),
-        {'mysql_engine': 'InnoDB'}
-        )
+        {'mysql_engine': 'InnoDB'})
 
     id = decl.Column(al.Integer, autoincrement=True, primary_key=True)
     project_id = decl.Column(al.Integer, al.ForeignKey('projects.id'), nullable=False)
@@ -111,9 +107,9 @@ class Tag(Base):
 
     __tablename__ = 'tags'
     __table_args__ = (
-        al.UniqueConstraint('file_id', 'identifier', 'line', 'column', 'type', name='uc_tag'),
-        {'mysql_engine': 'InnoDB'}
-        )
+        al.UniqueConstraint('file_id', 'identifier', 'line',
+                            'column', 'type', name='uc_tag'),
+        {'mysql_engine': 'InnoDB'})
 
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
     file_id = decl.Column(al.Integer, al.ForeignKey('files.id'), nullable=False)
@@ -139,8 +135,7 @@ class Comment(Base):
     __tablename__ = 'comments'
     __table_args__ = (
         al.UniqueConstraint('user_id', 'file_id', 'line'),
-        {'mysql_engine': 'InnoDB'}
-        )
+        {'mysql_engine': 'InnoDB'})
 
     id = decl.Column(al.Integer, primary_key=True, autoincrement=True)
     user_id = decl.Column(al.Integer, al.ForeignKey('users.id'), nullable=False)
