@@ -7,4 +7,4 @@ before_script:
         - python bootstrap.py -d
         - bin/buildout
         - cp trolle-config.ini.in trolle-config.ini
-script: test.sh
+script: ./test.sh
