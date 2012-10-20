@@ -23,7 +23,7 @@ DUMMY_FILEPATH = '/tmp/aaaa/test.py'
 class DummyConfig(object):
 
     def __init__(self, uri):
-        
+
         self.uri = uri
         self.echo = True
 
@@ -52,7 +52,7 @@ class TestTables(unittest.TestCase):
                 tables.create_user(sess,
                                    id=DUMMY_ID,
                                    name=DUMMY_NAME)
-   
+
             with sess.begin():
                 tables.create_project(sess,
                                       id=DUMMY_ID,
@@ -67,7 +67,7 @@ class TestTables(unittest.TestCase):
                                    project_id=DUMMY_ID,
                                    filepath=DUMMY_FILEPATH)
 
-    
+
     def test_user(self):
         u'''
         ユーザテーブルの定義テスト
@@ -81,6 +81,26 @@ class TestTables(unittest.TestCase):
 
             results = tables.search_user(sess, name=name)
             self.assertEqual(len(results), 1)
+
+
+    def test_login_info(self):
+
+        service = 'twitter'
+
+        with session.Session() as sess:
+            with sess.begin():
+                login_info = tables.create_login_info(sess,
+                                                      user_id=DUMMY_ID,
+                                                      service_name=service,
+                                                      service_user_id='aaaa')
+
+            self.assertTrue(tables.is_login_info_exists(sess,
+                                                        user_id=DUMMY_ID,
+                                                        service_name=service))
+            self.assertFalse(tables.is_login_info_exists(sess,
+                                                         user_id=DUMMY_ID,
+                                                         service_name='bbbbb'))
+
 
 
     def test_project(self):

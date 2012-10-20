@@ -39,6 +39,7 @@ def tokenize(filelike, fname):
 
     tokens = token.Token.mk_tokens(tokens)
 
-    return tokens
+    return token.File(tokens, fname)
+
 
 

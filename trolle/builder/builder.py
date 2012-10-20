@@ -6,7 +6,7 @@ u'''
 import os
 
 from trolle import path
-from . import handlers
+from . import handlers, directory
 
 
 
@@ -34,5 +34,9 @@ def build_project(proj):
     root = path.get_respository_by_project(proj)
 
     checkout(proj, root)
+
+    directory.parse_files(proj, root)
+
+    return True
 
 

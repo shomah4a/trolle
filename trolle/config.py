@@ -58,12 +58,14 @@ class Section(object):
         super(Section, self).__setattr__(key, value)
 
 
+
 root = '.'
 
 # 色々
 general = Section(
     converters=dict(repository=os.path.expandvars),
-    defaults=dict(repository='/tmp/path'))
+    defaults=dict(repository='/tmp/path',
+                  stream_encode='utf-8'))
 
 # サーバの設定
 server = Section(

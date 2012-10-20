@@ -2,6 +2,7 @@
 
 import sqlalchemy as al
 from sqlalchemy import sql
+from sqlalchemy.sql import functions
 from sqlalchemy.ext import declarative as decl
 
 
@@ -36,6 +37,7 @@ class LoginInfo(Base):
 
     __tablename__ = 'login_infos'
     __table_args__ = (
+        al.UniqueConstraint('user_id', 'service_name', name='uc_login_info'),
         {'mysql_engine': 'InnoDB'})
 
     user_id = decl.Column(al.Integer, al.ForeignKey('users.id'), primary_key=True)
@@ -160,18 +162,32 @@ def _create_maker(cls):
     return create_entry
 
 
+
+def _uc_columns(args):
+    u'''
+    UniqueConstraint のカラムを取ってくる
+    '''
+
+    for arg in args:
+
+        if isinstance(arg, al.UniqueConstraint):
+            return set(x.name for x in arg.columns)
+
+    return set()
+
+
+
 def _search_maker(cls):
     u'''
     検索のための関数を作る
     '''
 
+    tbl = cls.__table__
+    keys = tbl.c.keys()
+    cols = [tbl.c[x] for x in keys]
+    d = dict(zip(keys, cols))
+
     def search_entry(sess, **kw):
-
-        tbl = cls.__table__
-
-        keys = tbl.c.keys()
-        cols = [tbl.c[x] for x in keys]
-        d = dict(zip(keys, cols))
 
         query = sql.select(cols,
                            sql.and_(*[d[k] == v for k, v in kw.items()]),
@@ -187,21 +203,51 @@ def _search_maker(cls):
     return search_entry
 
 
+
+def _exists_checker_maker(cls):
+    u'''
+    すでにあるかどうかをチェックする関数を作る
+    '''
+
+    tbl = cls.__table__
+    keys = tbl.c.keys()
+    cols = [tbl.c[x] for x in keys]
+    d = dict(zip(keys, cols))
+    constraints = _uc_columns(cls.__table_args__)
+
+    def check_exists(sess, **kw):
+
+        kw = dict((k, v) for k, v in kw.items()
+                  if k in constraints)
+
+        query = sql.select([functions.count()],
+                           sql.and_(*[d[k] == v for k, v in kw.items()]),
+                           tbl)
+        result = sess.execute(query).fetchone()
+
+        return result[0] != 0
+    return check_exists
+
+
 create_user = _create_maker(User)
 search_user = _search_maker(User)
 
 create_login_info = _create_maker(LoginInfo)
 search_login_info = _search_maker(LoginInfo)
+is_login_info_exists = _exists_checker_maker(LoginInfo)
 
 create_project = _create_maker(Project)
 search_project = _search_maker(Project)
 
 create_file = _create_maker(File)
 search_file = _search_maker(File)
+is_file_exists = _exists_checker_maker(File)
 
 create_tag = _create_maker(Tag)
 search_tag = _search_maker(Tag)
+is_tag_exists = _exists_checker_maker(Tag)
 
 create_comment = _create_maker(Comment)
 search_comment = _search_maker(Comment)
+is_comment_exists = _exists_checker_maker(Comment)
 

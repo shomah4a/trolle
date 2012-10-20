@@ -5,10 +5,9 @@ u'''
 
 import subprocess
 
-from trolle import log
+from trolle import log, exceptions
 
 logger = log.mk_logger(__name__)
-
 
 HANDLERS = {}
 
@@ -29,10 +28,10 @@ def _exec(command):
                          stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT)
 
-    for line in p.stdout:
-        logger.debug(line.rstrip())
-
     p.wait()
+
+    if p.poll() != 0:
+        raise exceptions.CheckoutError(p)
 
     return p.poll()
 
@@ -47,6 +46,7 @@ def _git(repos, target):
     return _exec(['git', 'clone', repos, target])
 
 
+
 @_handler
 def _mercurial(repos, target):
     u'''
@@ -54,6 +54,7 @@ def _mercurial(repos, target):
     '''
 
     return _exec(['hg', 'clone', repos, target])
+
 
 
 @_handler

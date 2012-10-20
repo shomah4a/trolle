@@ -3,6 +3,8 @@ u'''
 ちょっと便利な機能郡
 '''
 
+import os
+
 
 class SlotEqual(object):
     u'''
@@ -33,9 +35,15 @@ class SlotEqual(object):
 
 
 
+def walk(root, func):
+    u'''
+    ディレクトリを歩く
+    '''
 
-
-
+    for path, dirs, files in os.walk(root):
+        for f in files:
+            fullpath = os.path.join(path, f)
+            func(fullpath)
 
 
 

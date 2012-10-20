@@ -14,12 +14,17 @@ class File(object):
         self.tokens = tokens
 
 
-    def list_tags(self):
+    def iter_tags(self):
 
         for token in self.tokens:
 
             if str(token.type).startswith('Token.Name'):
                 yield token
+
+
+    def iter_tokens(self):
+
+        return iter(self.tokens)
 
 
 
@@ -39,12 +44,6 @@ class Token(utils.SlotEqual):
         self.line = line
         self.column = column
 
-
-
-    def __eq__(self, other):
-        u'''
-        同値チェック
-        '''
 
 
     @classmethod
