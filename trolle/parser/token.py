@@ -10,11 +10,14 @@ class File(object):
 
     def __init__(self, fpath, tokens):
 
-        self.fpath = fpath
+        self.filepath = fpath
         self.tokens = tokens
 
 
     def iter_tags(self):
+        u'''
+        タグだけ取り出す
+        '''
 
         for token in self.tokens:
 
@@ -23,8 +26,19 @@ class File(object):
 
 
     def iter_tokens(self):
+        u'''
+        トークン全部取り出す
+        '''
 
         return iter(self.tokens)
+
+
+    def register_file(self, sess):
+        u'''
+        ファイルとトークンを DB に登録する
+        '''
+
+        relpath = self.filepath[len(root):]
 
 
 
@@ -43,6 +57,18 @@ class Token(utils.SlotEqual):
         self.text = text
         self.line = line
         self.column = column
+
+
+
+    def dump(self):
+        u'''
+        DB 登録用
+        '''
+
+        return dict(type=self.type,
+                    identifier=self.text,
+                    line=self.line,
+                    column=self.column)
 
 
 

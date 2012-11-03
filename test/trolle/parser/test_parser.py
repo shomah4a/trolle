@@ -13,6 +13,17 @@ class TestParser(unittest.TestCase):
     parser モジュールのテスト
     '''
 
+
+    def test_is_parsable(self):
+        u'''
+        パーサできるかどうかのチェック
+        '''
+
+        self.assertTrue(parser.is_parsable('test.py'))
+        self.assertFalse(parser.is_parsable('test.bbb'))
+
+
+
     def test_tokenize(self):
         u'''
         tokenize 関数のテスト
@@ -22,4 +33,4 @@ class TestParser(unittest.TestCase):
     return a + b''')
 
         sys.stderr.write((str(parser.tokenize(fp, 'test.py'))))
-        
+

@@ -62,9 +62,9 @@ class TestBuilder(unittest.TestCase):
 
         config.general.repository = root
 
-        builder.build_project(obj)
+        # builder.build_project(obj)
 
-        self.assertTrue(os.path.exists('/tmp/repos/1/10'))
+        # self.assertTrue(os.path.exists('/tmp/repos/1/10'))
 
 
     def test_checkout_error(self):

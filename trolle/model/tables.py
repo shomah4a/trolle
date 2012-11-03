@@ -217,6 +217,9 @@ def _exists_checker_maker(cls):
 
     def check_exists(sess, **kw):
 
+        if set(kw.keys()) != constraints:
+            return False
+
         kw = dict((k, v) for k, v in kw.items()
                   if k in constraints)
 
@@ -226,7 +229,20 @@ def _exists_checker_maker(cls):
         result = sess.execute(query).fetchone()
 
         return result[0] != 0
+
     return check_exists
+
+
+
+def _deleter_maker(cls):
+    u'''
+    削除する関数を作る
+    '''
+
+    tbl = cls.__table__
+    keys = tbl.c.keys()
+    cols = [tbl.c[x] for x in keys]
+    d = dict(zip(keys, cols))
 
 
 create_user = _create_maker(User)
